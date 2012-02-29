@@ -1,0 +1,25 @@
+{
+  "author": "Pedro Palazón Candel <kusorbox@gmail.com> (http://www.joyent.com)",
+  "name": "workflow-redis-backend",
+  "description": "A backend for workflow built over Redis",
+  "version": "0.1.0",
+  "homepage": "https://github.com/kusor/node-workflow-redis-backend",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kusor/node-workflow-redis-backend.git"
+  },
+  "main": "lib/workflow-redis-backend.js",
+  "scripts": {
+    "test": "./node_modules/.bin/tap ./test/*.test.js"
+  },
+  "engines": {
+    "node": ">=0.6"
+  },
+  "dependencies": {
+    "bunyan": "0.6.8",
+    "redis": "0.7.1"
+  },
+  "devDependencies": {
+    "tap": "0.2.0"
+  }
+}
