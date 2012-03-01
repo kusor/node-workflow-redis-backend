@@ -4,7 +4,7 @@ var test = require('tap').test,
     SOCKET = '/tmp/.' + uuid(),
     util = require('util'),
     async = require('async'),
-    Factory = require('../lib/index').Factory,
+    Factory = require('workflow').Factory,
     WorkflowRedisBackend = require('../lib/workflow-redis-backend');
 
 var backend, factory;
@@ -14,12 +14,6 @@ var aWorkflow, aJob, anotherJob;
 var helper = require('./helper'),
     config = helper.config(),
     runnerId = config.runner.identifier;
-
-config.backend.opts = {
-  'port': 6379,
-  'host': '127.0.0.1',
-  'db': 15
-};
 
 test('setup', function (t) {
   console.time('Redis Backend');
