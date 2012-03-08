@@ -3,15 +3,15 @@ over [Redis](http://redis.io/).
 
 # Installation
 
-npm install workflow-redis-backend
+npm install wf-redis-backend
 
 # Usage
 
-Add the following to the config file of your application using node-workflow:
+Add the following to the config file of your application using wf:
 
     {
       "backend": {
-        "module": "workflow-redis-backend",
+        "module": "wf-redis-backend",
         "opts": {
           "port": 6379,
           "host": "127.0.0.1",
@@ -24,7 +24,7 @@ Where `port` and `host` are obviously related to your redis server and `db` is
 the Redis Database you want to use. If your Redis server is password protected,
 add also `"password": "whatever"` to the configuration section above. 
 
-And that should be it. `node-workflow` REST API and Runners should take care of
+And that should be it. `wf` REST API and Runners should take care of
 properly loading the module on init.
 
 # Issues

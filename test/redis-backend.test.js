@@ -4,7 +4,7 @@ var test = require('tap').test,
     SOCKET = '/tmp/.' + uuid(),
     util = require('util'),
     async = require('async'),
-    Factory = require('node-workflow').Factory,
+    Factory = require('wf').Factory,
     WorkflowRedisBackend = require('../lib/workflow-redis-backend');
 
 var backend, factory;
