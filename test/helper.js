@@ -4,7 +4,7 @@ var path = require('path'),
     fs = require('fs');
 
 var cfg = path.resolve(__dirname, './config.json'),
-    cfg_file = path.existsSync(cfg) ? cfg :
+    cfg_file = fs.existsSync(cfg) ? cfg :
                path.resolve(__dirname, './config.json.sample'),
                config;
 
