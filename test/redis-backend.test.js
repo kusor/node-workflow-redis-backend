@@ -125,8 +125,8 @@ test('create job', function (t) {
         workflow: aWorkflow.uuid,
         target: '/foo/bar',
         params: {
-            a: '1',
-            b: '2'
+            foo: 'bar',
+            chicken: 'arise!'
         }
     }, function (err, job) {
         t.ifError(err, 'create job error');
@@ -153,8 +153,8 @@ test('duplicated job target', function (t) {
         workflow: aWorkflow.uuid,
         target: '/foo/bar',
         params: {
-            a: '1',
-            b: '2'
+            foo: 'bar',
+            chicken: 'arise!'
         }
     }, function (err, job) {
         t.ok(err, 'duplicated job error');
@@ -168,8 +168,8 @@ test('job with different params', function (t) {
         workflow: aWorkflow.uuid,
         target: '/foo/bar',
         params: {
-            a: '2',
-            b: '1'
+            foo: 'bar',
+            chicken: 'egg'
         }
     }, function (err, job) {
         t.ifError(err, 'create job error');
@@ -417,8 +417,28 @@ test('get all jobs', function (t) {
 });
 
 
+test('get all jobs searching by params', function (t) {
+    backend.getJobs({foo: 'bar'}, function (err, jobs) {
+        t.ifError(err, 'get all jobs error');
+        t.ok(jobs, 'jobs ok');
+        t.equal(jobs.length, 2);
+        t.end();
+    });
+});
+
+
+test('get some jobs searching by params', function (t) {
+    backend.getJobs({foo: 'bar', chicken: 'arise!'}, function (err, jobs) {
+        t.ifError(err, 'get all jobs error');
+        t.ok(jobs, 'jobs ok');
+        t.equal(jobs.length, 1);
+        t.end();
+    });
+});
+
+
 test('get succeeded jobs', function (t) {
-    backend.getJobs('succeeded', function (err, jobs) {
+    backend.getJobs({execution: 'succeeded'}, function (err, jobs) {
         t.ifError(err, 'get succeeded jobs error');
         t.ok(jobs, 'jobs ok');
         t.equal(jobs.length, 1);
@@ -435,8 +455,18 @@ test('get succeeded jobs', function (t) {
 });
 
 
+test('get no jobs searching by execution and params', function (t) {
+    backend.getJobs({execution: 'succeeded', foo: 'baz'}, function (err, jobs) {
+        t.ifError(err, 'get succeeded jobs error');
+        t.ok(jobs, 'jobs ok');
+        t.equal(jobs.length, 0);
+        t.end();
+    });
+});
+
+
 test('get queued jobs', function (t) {
-    backend.getJobs('queued', function (err, jobs) {
+    backend.getJobs({execution: 'queued'}, function (err, jobs) {
         t.ifError(err, 'get queued jobs error');
         t.ok(jobs, 'jobs ok');
         t.equal(jobs.length, 1);
