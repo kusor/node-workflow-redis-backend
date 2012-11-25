@@ -16,7 +16,7 @@ var helper = require('./helper'),
 
 test('setup', function (t) {
     console.time('Redis Backend');
-    backend = new WorkflowRedisBackend(config.backend.opts);
+    backend = WorkflowRedisBackend(config.backend.opts);
     t.ok(backend, 'backend ok');
     backend.init(function () {
         backend.client.flushdb(function (err, res) {
