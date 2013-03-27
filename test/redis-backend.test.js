@@ -483,6 +483,20 @@ test('get queued jobs', function (t) {
 });
 
 
+test('retry job', function (t) {
+    backend.runJob(anotherJob.uuid, runnerId, function (err, job) {
+        t.ifError(err, 'retry job run job error');
+        anotherJob.execution = 'retried';
+        backend.finishJob(anotherJob, function (err, job) {
+            t.ifError(err, 'retry job error');
+            t.ok(!job.runner_id, 'retry job runner');
+            t.equal(job.execution, 'retried', 'retry job status');
+            t.end();
+        });
+    });
+});
+
+
 test('add job info', function (t) {
     t.test('to unexisting job', function (t) {
         backend.addInfo(
