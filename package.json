@@ -2,7 +2,7 @@
   "author": "Pedro Palazón Candel <kusorbox@gmail.com> (http://www.joyent.com)",
   "name": "wf-redis-backend",
   "description": "A backend for wf built over Redis",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "homepage": "https://github.com/kusor/node-workflow-redis-backend",
   "repository": {
     "type": "git",

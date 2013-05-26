@@ -400,6 +400,23 @@ test('get workflows', function (t) {
 });
 
 
+test('search workflows by name', function (t) {
+    backend.getWorkflows({name: aWorkflow.name}, function (err, workflows) {
+        t.ifError(err, 'get workflows error');
+        t.ok(workflows, 'workflows ok');
+        t.equal(workflows[0].uuid, aWorkflow.uuid, 'workflow uuid ok');
+        t.ok(util.isArray(workflows[0].chain), 'workflow chain ok');
+        t.ok(util.isArray(workflows[0].onerror), 'workflow onerror ok');
+        backend.getWorkflows({name: 'whatever'}, function (err2, workflows2) {
+            t.ifError(err2, 'get workflows error');
+            t.ok(workflows2, 'workflows ok');
+            t.equal(0, workflows2.length);
+            t.end();
+        });
+    });
+});
+
+
 test('get all jobs', function (t) {
     backend.getJobs(function (err, jobs) {
         t.ifError(err, 'get all jobs error');
