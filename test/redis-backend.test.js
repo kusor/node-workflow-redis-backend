@@ -137,6 +137,7 @@ test('create job', function (t) {
         t.ok(job.uuid, 'job uuid');
         t.ok(util.isArray(job.chain), 'job chain is array');
         t.ok(util.isArray(job.onerror), 'job onerror is array');
+        t.equal(typeof job.num_attempts, 'number', 'num_attempts is a number');
         t.ok(
           (typeof (job.params) === 'object' && !util.isArray(job.params)),
           'params ok');
@@ -145,6 +146,11 @@ test('create job', function (t) {
             t.ifError(err, 'get job property error');
             t.equal(val, '/foo/bar', 'property value ok');
             t.end();
+        });
+
+        backend.getJob(aJob.uuid, function(err, job){
+            t.ifError(err, 'get job error');
+            t.equal(typeof job.num_attempts, 'number', 'num_attempts is a number');
         });
     });
 });
